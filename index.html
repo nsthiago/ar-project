@@ -2,9 +2,9 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Mensagem em Realidade Aumentada</title>
+    <title>Surpresa em Realidade Aumentada</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
   </head>
   <body style="margin: 0; overflow: hidden">
     <a-scene embedded arjs>
@@ -13,12 +13,14 @@
           id="arVideo"
           src="https://ar-project-five.vercel.app/videos/video1.mp4"
           loop
-          playsinline
+          preload="auto"
           crossorigin="anonymous"
+          playsinline
+          webkit-playsinline
         ></video>
       </a-assets>
 
-      <a-marker preset="hiro" id="markerHiro">
+      <a-marker preset="hiro" id="marker">
         <a-video
           src="#arVideo"
           width="2"
@@ -31,16 +33,18 @@
     </a-scene>
 
     <script>
-      const marker = document.querySelector("#markerHiro");
+      const marker = document.querySelector("#marker");
       const video = document.querySelector("#arVideo");
 
       marker.addEventListener("markerFound", () => {
+        console.log("Marcador detectado. Tocando vídeo.");
         video.play();
       });
 
       marker.addEventListener("markerLost", () => {
+        console.log("Marcador perdido. Pausando vídeo.");
         video.pause();
-        video.currentTime = 0; // Reinicia o vídeo ao perder o marcador
+        video.currentTime = 0;
       });
     </script>
   </body>
