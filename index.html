@@ -12,23 +12,35 @@
         <video
           id="arVideo"
           src="https://ar-project-five.vercel.app/videos/video1.mp4"
-          autoplay
           loop
           playsinline
-          webkit-playsinline
           crossorigin="anonymous"
         ></video>
       </a-assets>
 
-      <a-marker preset="hiro">
+      <a-marker preset="hiro" id="markerHiro">
         <a-video
           src="#arVideo"
           width="2"
-          height="1.2"
-          position="0 0 0"
+          height="1.1"
+          position="0 0 0.1"
         ></a-video>
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+      const marker = document.querySelector("#markerHiro");
+      const video = document.querySelector("#arVideo");
+
+      marker.addEventListener("markerFound", () => {
+        video.play();
+      });
+
+      marker.addEventListener("markerLost", () => {
+        video.pause();
+        video.currentTime = 0; // Reinicia o vídeo ao perder o marcador
+      });
+    </script>
   </body>
 </html>
