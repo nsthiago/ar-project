@@ -12,18 +12,20 @@
         <video
           id="arVideo"
           src="https://ar-project-five.vercel.app/videos/video1.mp4"
+          autoplay
           loop
           playsinline
+          webkit-playsinline
           crossorigin="anonymous"
         ></video>
       </a-assets>
 
-      <a-marker preset="hiro" id="markerHiro">
+      <a-marker preset="hiro">
         <a-video
           src="#arVideo"
           width="2"
-          height="1.1"
-          position="0 0 0.1"
+          height="1.2"
+          position="0 0 0"
         ></a-video>
       </a-marker>
       <a-entity camera></a-entity>
